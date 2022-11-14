@@ -1,0 +1,67 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            Int           @id @default(autoincrement())
+  firstName     String
+  lastName      String
+  password      String
+  email         String        @unique
+  resetToken    String        @unique @default("")
+  beneficiaries Beneficiary[]
+}
+
+// TODO: Auth token
+
+model Beneficiary {
+  id             Int     @id @default(autoincrement())
+  firstName      String
+  lastName       String
+  activitySector String  @default("")
+  sectorCode     String  @default("")
+  points         Point[]
+  userId         Int
+  createdBy      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Point {
+  id                  Int               @id @default(autoincrement())
+  location            Float[]
+  name                String            @default("")
+  adress              String
+  description         String
+  tag                 String
+  mobility            String
+  vehiculePossessedBy String
+  goAlone             Boolean
+  frequency           String
+  appreciation        PointAppreciation @default(LIKE)
+  benefId             Int
+  assignedTo          Beneficiary       @relation(fields: [benefId], references: [id], onDelete: Cascade)
+}
+
+model GlobalPoint {
+  id          Int    @id @default(autoincrement())
+  location    Int[]
+  name        String
+  category    String
+  address     String
+  mail        String
+  phone       String
+  description String
+}
+
+enum PointAppreciation {
+  LIKE
+  DISLIKE
+  INDIFFERENT
+}

@@ -1,0 +1,28 @@
+@font-face {
+  font-family: 'mobiscope';
+  src: url('/assets/font/mobiscope-Regular.otf');
+  src: url('/assets/font/mobiscope-Regular.otf#iefix') format('opentype'),
+    url('/assets/font/mobiscope-Regular.woff2') format('woff2'),
+    url('/assets/font/mobiscope-Regular.woff') format('woff');
+  font-style: normal;
+  font-weight: 400;
+}
+
+.icon {
+  display: inline-block;
+  font-family: 'mobiscope' !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  vertical-align: -0.125em;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-pen::before {
+  content: '\ea01';
+}
